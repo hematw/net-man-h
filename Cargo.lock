@@ -495,7 +495,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "net-man-h"
+name = "netman-h"
 version = "0.2.0"
 dependencies = [
  "dirs",

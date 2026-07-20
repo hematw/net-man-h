@@ -20,7 +20,7 @@ impl AppWindow {
     pub fn new(app: &adw::Application) -> Self {
         let window = adw::ApplicationWindow::builder()
             .application(app)
-            .title("net-man-h")
+            .title("netman-h")
             .default_width(920)
             .default_height(680)
             .build();
@@ -42,7 +42,7 @@ impl AppWindow {
         sidebar.add_css_class("sidebar");
         sidebar.set_size_request(200, -1);
 
-        let brand = Label::new(Some("net-man-h"));
+        let brand = Label::new(Some("netman-h"));
         brand.add_css_class("brand-title");
         brand.set_halign(gtk4::Align::Start);
         let brand_sub = Label::new(Some("NetworkManager"));

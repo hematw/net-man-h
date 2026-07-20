@@ -2,10 +2,12 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-BIN_DIR="${HOME}/.local/bin"
-DESKTOP_DIR="${HOME}/.local/share/applications"
-APP_BIN="${BIN_DIR}/net-man-h"
-RELEASE_BIN="${ROOT}/target/release/net-man-h"
+PREFIX="${PREFIX:-$HOME/.local}"
+BIN_DIR="${PREFIX}/bin"
+DESKTOP_DIR="${PREFIX}/share/applications"
+APP_BIN="${BIN_DIR}/netman-h"
+RELEASE_BIN="${ROOT}/target/release/netman-h"
+DESKTOP_SRC="${ROOT}/data/netman-h.desktop"
 
 mkdir -p "$BIN_DIR" "$DESKTOP_DIR"
 
@@ -14,24 +16,14 @@ if [[ ! -x "${RELEASE_BIN}" ]]; then
   exit 1
 fi
 
-# Remove previous launcher name if present
-rm -f "${BIN_DIR}/aether-net" "${DESKTOP_DIR}/aether-net.desktop"
+# Remove previous launcher names if present
+rm -f "${BIN_DIR}/aether-net" "${BIN_DIR}/net-man-h"
+rm -f "${DESKTOP_DIR}/aether-net.desktop" "${DESKTOP_DIR}/net-man-h.desktop"
 
-cat > "$APP_BIN" <<EOF
-#!/usr/bin/env bash
-exec "${RELEASE_BIN}" "\$@"
-EOF
-chmod +x "$APP_BIN"
+install -Dm755 "$RELEASE_BIN" "$APP_BIN"
 
-cat > "${DESKTOP_DIR}/net-man-h.desktop" <<EOF
-[Desktop Entry]
-Name=net-man-h
-Comment=Modern NetworkManager GUI
-Exec=${APP_BIN}
-Terminal=false
-Type=Application
-Categories=Network;Settings;
-StartupWMClass=io.github.hemat.NetManH
-EOF
+# Rewrite Exec for user-local installs; system packages use data/*.desktop as-is.
+sed "s|^Exec=.*|Exec=${APP_BIN}|" "$DESKTOP_SRC" > "${DESKTOP_DIR}/netman-h.desktop"
 
-echo "Installed launcher to ${APP_BIN}"
+echo "Installed ${APP_BIN}"
+echo "Desktop entry: ${DESKTOP_DIR}/netman-h.desktop"

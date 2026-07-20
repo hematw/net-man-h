@@ -1,9 +1,15 @@
 [package]
-name = "net-man-h"
+name = "netman-h"
 version = "0.2.0"
 edition = "2021"
 description = "Modern NetworkManager GUI for Omarchy / Hyprland"
-authors = ["hemat"]
+authors = ["Hematullah Waziri <hematullahw@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/hematw/net-man-h"
+repository = "https://github.com/hematw/net-man-h"
+keywords = ["networkmanager", "gtk", "libadwaita", "wifi", "omarchy"]
+categories = ["gui"]
 
 [dependencies]
 gtk4 = { version = "0.10", features = ["v4_14"] }

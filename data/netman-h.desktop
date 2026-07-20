@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=netman-h
+GenericName=Network Manager
+Comment=Modern NetworkManager GUI for Omarchy / Hyprland
+Exec=netman-h
+Icon=network-workgroup
+Terminal=false
+Type=Application
+Categories=Network;Settings;System;
+Keywords=network;wifi;ethernet;nm;NetworkManager;
+StartupWMClass=io.github.hemat.NetManH

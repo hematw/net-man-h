@@ -1,4 +1,4 @@
-# net-man-h
+# netman-h
 
 Pure Rust NetworkManager GUI for Omarchy / Hyprland — **GTK4 + Libadwaita**.
 
@@ -27,10 +27,35 @@ cargo build --release
 ./scripts/install.sh
 ```
 
+## Arch / AUR
+
+Packaging lives in [`aur/`](aur/). After a `vX.Y.Z` GitHub release tag:
+
+```bash
+# local package build
+cd aur
+makepkg -si
+
+# publish / update AUR package
+# git clone ssh://aur@aur.archlinux.org/netman-h.git
+# copy PKGBUILD + .SRCINFO, then:
+makepkg --printsrcinfo > .SRCINFO
+git add PKGBUILD .SRCINFO
+git commit -m "Update to $pkgver"
+git push
+```
+
+Install once published:
+
+```bash
+yay -S netman-h
+# or: paru -S netman-h
+```
+
 ## Waybar
 
 ```jsonc
-"on-click": "net-man-h"
+"on-click": "netman-h"
 ```
 
 ## Develop
@@ -38,5 +63,3 @@ cargo build --release
 ```bash
 cargo run
 ```
-
-The previous Tauri prototype lives under `legacy/` for reference.
