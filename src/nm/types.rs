@@ -10,8 +10,6 @@ pub struct NetworkSnapshot {
     pub devices: Vec<DeviceInfo>,
     pub connections: Vec<ConnectionInfo>,
     pub wifi_networks: Vec<WifiNetwork>,
-    pub hotspot_active: bool,
-    pub hotspot_ssid: String,
 }
 
 #[derive(Clone, Debug)]
@@ -40,10 +38,9 @@ pub struct WifiNetwork {
     pub security: String,
     pub in_use: bool,
     pub saved: bool,
-    pub connection_name: Option<String>,
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Default)]
 pub struct IpConfig {
     pub method: String,
     pub addresses: String,

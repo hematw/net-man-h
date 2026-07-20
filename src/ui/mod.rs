@@ -1,2 +1,4 @@
-pub mod pages;
-pub mod window;
+mod pages;
+mod window;
+
+pub use window::AppWindow;

@@ -1,22 +1,22 @@
-use gtk4::{glib, prelude::*};
+use gtk4::prelude::*;
 use libadwaita as adw;
-use libadwaita::prelude::*;
 
 use crate::theme::load_theme;
-use crate::ui::window::AppWindow;
-
-static WINDOW: std::sync::OnceLock<glib::WeakRef<adw::ApplicationWindow>> =
-    std::sync::OnceLock::new();
+use crate::ui::AppWindow;
 
 pub fn on_activate(app: &adw::Application) {
-    if let Some(window) = WINDOW.get().and_then(|w| w.upgrade()) {
+    if let Some(window) = app.active_window() {
+        window.present();
+        return;
+    }
+
+    // Also check windows() in case focus is elsewhere.
+    if let Some(window) = app.windows().into_iter().next() {
         window.present();
         return;
     }
 
     load_theme().apply();
-
     let window = AppWindow::new(app);
-    let _ = WINDOW.set(window.downgrade());
     window.present();
 }

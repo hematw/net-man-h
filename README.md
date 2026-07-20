@@ -1,26 +1,26 @@
-# Aether Net
+# net-man-h
 
-A modern NetworkManager GUI for Omarchy / Hyprland. **Pure Rust** — GTK4 + Libadwaita + NetworkManager D-Bus.
+Pure Rust NetworkManager GUI for Omarchy / Hyprland — **GTK4 + Libadwaita**.
 
-## Features
+## Features (core)
 
-- WiFi scan, connect (saved profiles reconnect without password), disconnect, forget
-- Ethernet and VPN profile management
-- IPv4 static configuration (address, gateway, DNS, MTU)
-- WiFi hotspot
-- Omarchy theme color sync
+- Overview — connection status, devices, active profiles
+- WiFi — scan, connect (saved networks reconnect without password), disconnect, forget, radio toggle
+- Ethernet — connect/disconnect + static IPv4 editor (address, gateway, DNS, MTU, autoconnect)
+- Omarchy theme colors from `~/.config/omarchy/current/theme/colors.toml`
 - Single-instance window (Waybar click focuses existing window)
 - Background NM work (UI stays responsive)
+
+built with 🩵 by hematw
 
 ## Requirements
 
 - Arch Linux / Omarchy
-- NetworkManager
-- `nmcli` (used only for IPv4 profile edits and radio toggle)
+- NetworkManager + `nmcli`
+- `gtk4`, `libadwaita`
 - Rust toolchain
-- GTK4, Libadwaita (`gtk4`, `libadwaita` packages)
 
-## Build
+## Build & install
 
 ```bash
 cargo build --release
@@ -30,13 +30,13 @@ cargo build --release
 ## Waybar
 
 ```jsonc
-"on-click": "aether-net"
+"on-click": "net-man-h"
 ```
 
-## Legacy
+## Develop
 
-The original Tauri + React app is archived in `legacy/`.
+```bash
+cargo run
+```
 
-## License
-
-MIT
+The previous Tauri prototype lives under `legacy/` for reference.

@@ -1,6 +1,4 @@
-use gtk4::gdk::RGBA;
-use gtk4::prelude::*;
-use gtk4::{CssProvider, STYLE_PROVIDER_PRIORITY_APPLICATION};
+use gtk4::CssProvider;
 use std::collections::HashMap;
 use std::fs;
 
@@ -82,67 +80,77 @@ impl Theme {
         let provider = CssProvider::new();
         let css = format!(
             r#"
-            window {{
+            window.aether-window {{
                 background-color: {bg};
                 color: {fg};
             }}
             .sidebar {{
                 background-color: {surface2};
-                border-right: 1px solid alpha({fg}, 0.08);
+                border-right: 1px solid alpha({fg}, 0.10);
+                padding: 12px;
             }}
-            .content-card {{
-                background-color: alpha({surface}, 0.92);
-                border-radius: 16px;
-                padding: 16px;
+            .brand-title {{
+                font-weight: 700;
+                font-size: 1.1rem;
             }}
             .muted {{
                 color: {muted};
-                opacity: 0.95;
             }}
             .status-pill {{
-                background-color: alpha({green}, 0.22);
+                background-color: alpha({green}, 0.25);
                 color: {fg};
                 border-radius: 999px;
                 padding: 4px 10px;
             }}
-            .network-row:hover {{
-                background-color: alpha({accent}, 0.12);
+            .network-row {{
+                border-radius: 12px;
+                margin: 2px 0;
             }}
-            .accent-button {{
+            .network-row:hover {{
+                background-color: alpha({accent}, 0.14);
+            }}
+            button.accent-button {{
                 background: {accent};
                 color: {bg};
                 border-radius: 12px;
-                padding: 8px 14px;
             }}
-            .error-banner {{
-                background-color: alpha({red}, 0.18);
-                color: {fg};
+            button, togglebutton, checkbutton {{
+                cursor: pointer;
+            }}
+            button:disabled {{
+                cursor: default;
+                opacity: 0.65;
+            }}
+            .credit {{
+                color: {muted};
+                font-size: 0.82rem;
+                margin-top: 8px;
+            }}
+            .nav-button {{
                 border-radius: 12px;
                 padding: 10px 12px;
+                cursor: pointer;
+            }}
+            .nav-button:checked {{
+                background-color: alpha({accent}, 0.22);
             }}
             "#,
             bg = self.background,
             fg = self.foreground,
-            surface = self.surface,
             surface2 = self.surface2,
             muted = self.muted,
             accent = self.accent,
             green = self.green,
-            red = self.red,
         );
         provider.load_from_string(&css);
         if let Some(display) = gtk4::gdk::Display::default() {
             gtk4::style_context_add_provider_for_display(
                 &display,
                 &provider,
-                STYLE_PROVIDER_PRIORITY_APPLICATION,
+                gtk4::STYLE_PROVIDER_PRIORITY_APPLICATION,
             );
         }
 
-        let settings = libadwaita::StyleManager::default();
-        settings.set_color_scheme(libadwaita::ColorScheme::ForceDark);
-        if let Ok(accent) = RGBA::parse(&self.accent) {
-            settings.set_accent_color_rgba(&accent);
-        }
+        libadwaita::StyleManager::default().set_color_scheme(libadwaita::ColorScheme::ForceDark);
     }
 }
