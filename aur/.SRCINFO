@@ -15,6 +15,6 @@ pkgbase = netman-h
 	options = !lto
 	options = !debug
 	source = netman-h-0.2.0.tar.gz::https://github.com/hematw/net-man-h/archive/refs/tags/v0.2.0.tar.gz
-	b2sums = SKIP
+	b2sums = d54e2a2ac3de9ab2de0b9a6d6cf21c997bb599f065af6f0e306c5b77ecae0a553485434c25c430aa6815ff77c8cca13456f4bb011ef465af963710f1d2561d3f
 
 pkgname = netman-h
