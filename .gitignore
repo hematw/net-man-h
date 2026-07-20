@@ -1,0 +1,6 @@
+/target/
+/legacy/frontend/node_modules/
+/legacy/tauri/target/
+/dist/
+/node_modules/
+*.tsbuildinfo

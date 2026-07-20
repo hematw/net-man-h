@@ -1,0 +1,18 @@
+[package]
+name = "aether-net"
+version = "0.2.0"
+edition = "2021"
+description = "Modern NetworkManager GUI for Omarchy / Hyprland"
+authors = ["hemat"]
+
+[dependencies]
+gtk4 = "0.10"
+libadwaita = "0.8"
+glib = "0.21"
+gio = "0.21"
+network-manager = "0.11"
+dirs = "6"
+
+[profile.release]
+lto = true
+strip = true
